@@ -29,7 +29,6 @@ public class FruitsAdapter extends BaseAdapter {
         this.layout = layout;
         this.frutas = frutas;
 
-
     }
 
     @Override
@@ -50,25 +49,39 @@ public class FruitsAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View v = convertView;
+        ViewHolder holder;
 
-        LayoutInflater layoutInflater = LayoutInflater.from(this.context);
-        v = layoutInflater.inflate(this.layout, null);
+        if (convertView == null) {
 
-        String currentName = this.frutas.get(position).getName();
-        String currentOrigin = this.frutas.get(position).getOrigin();
-        int currentIcon = this.frutas.get(position).getRefIcon();
+            convertView = LayoutInflater.from(this.context).inflate(this.layout, null);
 
-        TextView textViewName = (TextView) v.findViewById(R.id.textViewName);
-        TextView textViewOrigin = (TextView) v.findViewById(R.id.textViewOrigin);
-        ImageView imageViewIcon = (ImageView) v.findViewById(R.id.imageViewFruit);
+            holder = new ViewHolder();
 
-        textViewName.setText(currentName);
-        textViewOrigin.setText(currentOrigin);
-        imageViewIcon.setBackground(v.getResources().getDrawable(currentIcon));
+            holder.name = (TextView) convertView.findViewById(R.id.textViewName);
+            holder.origin = (TextView) convertView.findViewById(R.id.textViewOrigin);
+            holder.refIcon = (ImageView) convertView.findViewById(R.id.imageViewFruit);
+            convertView.setTag(holder);
+
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+
+        Fruta currentFruit = frutas.get(position);
+
+        holder.name.setText(currentFruit.getName());
+        holder.origin.setText(currentFruit.getOrigin());
+        holder.refIcon.setImageResource(currentFruit.getRefIcon());
 
 
-        return v;
+        return convertView;
 
     }
+
+    static class ViewHolder {
+
+        private TextView name;
+        private TextView origin;
+        private ImageView refIcon;
+    }
+
 }

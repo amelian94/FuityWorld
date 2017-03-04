@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                     this.listViewFruits.setVisibility(View.INVISIBLE);
                     this.gridViewFruits.setVisibility(View.VISIBLE);
                     this.vistaActiva = GRID_VIEW;
-                    item.setIcon(android.R.drawable.ic_dialog_alert);
+                    item.setIcon(android.R.drawable.ic_menu_sort_by_size);
                 } else {
                     this.listViewFruits.setVisibility(View.VISIBLE);
                     this.gridViewFruits.setVisibility(View.INVISIBLE);
@@ -128,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
+
         MenuInflater menuInflater = getMenuInflater();
 
         menuInflater.inflate(R.menu.item_context_menu, menu);
